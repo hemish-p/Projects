@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>E/D Pro — Encrypt. Decode. Dominate.</title>
+<link rel="stylesheet" href="style.css">
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;600&family=Share+Tech+Mono&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+  <div class="nav-inner">
+    <div class="logo">E/D_Pro</div>
+    <a href="landing.html" class="nav-back">← Back</a>
+  </div>
+</header>
+
+<button id="nav-trigger" class="nav-trigger" aria-label="Menu">
+  <span></span><span></span><span></span>
+</button>
+
+<div id="nav-dropdown" class="nav-dropdown">
+  <div class="nav-dropdown-header">// SELECT MODULE</div>
+  <button class="nav-item active" data-tab="encoder">
+    <span class="nav-icon">[■]</span>
+    <span class="nav-label">> Encoder / Decoder</span>
+  </button>
+  <button class="nav-item" data-tab="checker">
+    <span class="nav-icon">[ ]</span>
+    <span class="nav-label">> Password Checker</span>
+  </button>
+  <button class="nav-item" data-tab="file-encrypt">
+    <span class="nav-icon">[ ]</span>
+    <span class="nav-label">> File Encryptor</span>
+  </button>
+</div>
+<div id="nav-overlay" class="nav-overlay"></div>
+
+<main>
+  <div class="module-badge" id="module-badge">MODULE: ENCODER / DECODER</div>
+
+  <!-- ENCODER TAB -->
+  <div id="tab-encoder" class="tab-content active grid-layout">
+    <section class="glass-panel">
+      <div class="panel-header">
+        <h2>Process Text</h2>
+        <div class="mode-select">
+          <button class="mode-btn active" data-mode="encrypt">Encrypt</button>
+          <button class="mode-btn" data-mode="decrypt">Decrypt</button>
+        </div>
+      </div>
+      <div class="controls">
+        <div class="control-group">
+          <label>Algorithm</label>
+          <select id="algorithm">
+            <option value="base64">Base64</option>
+            <option value="caesar">Caesar Cipher</option>
+            <option value="mixed">Mixed Mode</option>
+          </select>
+        </div>
+        <div class="control-group" id="key-group" style="display:none">
+          <label>Shift (1-25)</label>
+          <input type="number" id="key-input" min="1" max="25" value="3">
+        </div>
+      </div>
+      <textarea id="input-text" placeholder="// paste data here..."></textarea>
+      <button id="action-btn" class="primary-btn">> Encrypt</button>
+    </section>
+
+    <section class="glass-panel">
+      <div class="panel-header">
+        <h2>Output</h2>
+        <button id="copy-btn" class="icon-btn">📋</button>
+      </div>
+      <div id="output-area" class="output-content">
+        <span class="placeholder">// output will render here...</span>
+      </div>
+      <div id="decryption-tools" style="display:none">
+        <div id="auto-detect-badge" class="info-badge">Auto-Detected: Mixed</div>
+        <div id="rank-controls" class="rank-controls">
+          <button id="next-match-btn" class="secondary-btn">Next Match</button>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- CHECKER TAB -->
+  <div id="tab-checker" class="tab-content center-layout" style="display:none">
+    <section class="glass-panel checker-panel">
+      <h2>Password Strength</h2>
+      <div class="input-wrapper floating-label-group">
+        <input type="password" id="password-input" placeholder=" " autocomplete="off">
+        <label class="floating-label">Enter password...</label>
+        <button id="toggle-password" class="icon-btn">👁️</button>
+      </div>
+      <div class="strength-meter">
+        <div class="meter-bar"><div id="strength-fill"></div></div>
+        <span id="strength-text">Enter password</span>
+      </div>
+      <div class="analysis-grid">
+        <div class="analysis-item"><span>Crack Time</span><span id="crack-time">--</span></div>
+        <div class="analysis-item"><span>Entropy</span><span id="entropy-score">0 bits</span></div>
+      </div>
+      <ul id="password-feedback" class="feedback-list"></ul>
+    </section>
+  </div>
+
+  <!-- FILE ENCRYPTOR TAB -->
+  <div id="tab-file-encrypt" class="tab-content center-layout" style="display:none">
+    <section class="glass-panel">
+      <div class="panel-header">
+        <h2>File Security</h2>
+        <div class="mode-select">
+          <button class="file-mode-btn active" data-file-mode="encrypt">Encrypt</button>
+          <button class="file-mode-btn" data-file-mode="decrypt">Decrypt</button>
+        </div>
+      </div>
+      <div id="file-encrypt-view" class="file-view">
+        <div class="file-upload-zone" id="encrypt-drop-zone">
+          <p>Drag & drop file or click</p>
+          <span id="encrypt-file-name" class="file-name-display">No file</span>
+          <input type="file" id="encrypt-file-input" class="hidden-file-input">
+        </div>
+        <button id="encrypt-file-btn" class="primary-btn" disabled>> Encrypt & Download</button>
+      </div>
+      <div id="file-decrypt-view" class="file-view" style="display:none">
+        <div class="decrypt-uploads">
+          <input type="file" id="key-file-input" class="hidden-file-input" accept=".key">
+          <input type="file" id="fernet-file-input" class="hidden-file-input" accept=".fernet">
+          <div class="file-upload-zone small" id="key-drop-zone">Upload .key</div>
+          <div class="file-upload-zone small" id="fernet-drop-zone">Upload .fernet</div>
+        </div>
+        <button id="decrypt-file-btn" class="primary-btn" disabled>> Decrypt & Download</button>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer><p>E/D_Pro © 2025 — Client-side only.</p></footer>
+
+<script src="script.js"></script>
+</body>
+</html>
